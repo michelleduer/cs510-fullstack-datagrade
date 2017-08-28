@@ -11,7 +11,9 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/5.0.10/highcharts.js"></script>
 
+        <!-- // TODO: not needed?
         <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        -->
 
 
         <title>Data Grade</title>
@@ -113,21 +115,11 @@
                     </div>
                 </div>
                 <div class="form-group" id="quarterTerms">
-                    <label for="quarterTerms" class="col-sm-2 control-label" style="display:none">Term</label>
+                    <label for="quarterTerms" class="col-sm-2 control-label">Term</label>
                     <div class="col-sm-3">
-                        <select multiple class="form-control" id="quarterTerms" style="display:none">
+                        <select multiple class="form-control" id="courseTerm">
                             <option selected>Fall</option>
                             <option>Winter</option>
-                            <option>Spring</option>
-                            <option>Summer</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="semesterTerms" class="col-sm-2 control-label" style="display:none">Term</label>
-                    <div class="col-sm-3">
-                        <select multiple class="form-control" id="semesterTerms" style="display:none">
-                            <option selected>Fall</option>
                             <option>Spring</option>
                             <option>Summer</option>
                         </select>
@@ -142,7 +134,10 @@
             <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
         </div>
 
-        <script type="text/javascript" src="js/course_entry.js"></script>
+        <script type="text/javascript" src="js/find_course.js"></script>
+        <!-- // TODO: needed?
+        <script type="text/javascript" src="js/db.js"></script>
+        -->
         <script type="text/javascript" src="js/graph.js"></script>
     </body>
 </html>
