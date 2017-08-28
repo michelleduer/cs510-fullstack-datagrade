@@ -1,0 +1,28 @@
+body {
+    padding-top: 80px;
+    color: black;
+}
+.navbar-brand {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 40px;
+    color: #FFFFFF;
+}
+.navbar {
+    border-bottom: 5px slategray solid;
+    border-top: 5px slategray solid;
+    background-color: lightskyblue;
+    font-size: 120%;
+    color: yellow;
+}
+.nav {
+    background-color: white;
+    align-content: center;
+    color: red;
+}
+#menuItem {
+    border-left: 1px darkgray solid;
+}
+#menuLogout {
+    border-left: 1px darkgray solid;
+    border-right: 1px darkgray solid;
+}
