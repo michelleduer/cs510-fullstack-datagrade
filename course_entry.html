@@ -9,8 +9,10 @@
 
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/5.0.10/highcharts.js"></script>
 
-        <script type="text/javascript" src="course_entry.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+
 
         <title>Data Grade</title>
 
@@ -102,7 +104,7 @@
                 </div>
                 <div class="form-group" id="courseSystem">
                     <label for="courseSystem" class="col-sm-2 control-label">Academic System</label>
-                    <div class="col-sm-8">
+                    <div class="col-sm-3">
                         <select class="form-control" id="courseSystem">
                             <option value="quarter">Quarter</option>
                             <option value="semester">Semester</option>
@@ -112,7 +114,7 @@
                 </div>
                 <div class="form-group" id="quarterTerms">
                     <label for="quarterTerms" class="col-sm-2 control-label" style="display:none">Term</label>
-                    <div class="col-sm-6">
+                    <div class="col-sm-3">
                         <select multiple class="form-control" id="quarterTerms" style="display:none">
                             <option selected>Fall</option>
                             <option>Winter</option>
@@ -123,7 +125,7 @@
                 </div>
                 <div class="form-group">
                     <label for="semesterTerms" class="col-sm-2 control-label" style="display:none">Term</label>
-                    <div class="col-sm-6">
+                    <div class="col-sm-3">
                         <select multiple class="form-control" id="semesterTerms" style="display:none">
                             <option selected>Fall</option>
                             <option>Spring</option>
@@ -137,6 +139,10 @@
                     </div>
                 </div>
             </div>
+            <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
         </div>
+
+        <script type="text/javascript" src="js/course_entry.js"></script>
+        <script type="text/javascript" src="js/graph.js"></script>
     </body>
 </html>
