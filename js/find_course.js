@@ -2,10 +2,21 @@
 alert("DO THIS FOR OLIVIA!");
 
 $(function() {
-    functionNoMatch();
-    //var item = document.getElementById("courseSystem").selectedIndex;
+    jQuery('#submitButton')
+        .on('click', function(event) {
+            alert("submit button clicked!");
+        })
+    ;
 });
 
-var functionNoMatch = function() {
-    alert("accessing the correct function!");
+/*
+var functionFind = function() {
+    alert("accessing the functionFind...");
+
+    db.query('SELECT name FROM courses WHERE ', function (err, rows, fields) {
+        if (err) throw err
+
+        console.log('The courses table contains: ', rows)
+    })
 };
+*/
