@@ -146,7 +146,7 @@ Highcharts.chart('container', {
         }]
     },
     tooltip: {
-        valueSuffix: ' m/s'
+        valueSuffix: '%'
     },
     plotOptions: {
         spline: {
