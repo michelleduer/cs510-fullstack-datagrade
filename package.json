@@ -1,0 +1,22 @@
+{
+  "name": "package",
+  "version": "1.0.0",
+  "description": "package.json file containing dependencies and other useful details",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michelleduer/cs510-fullstack-datagrade.git"
+  },
+  "author": "Michelle Duer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/michelleduer/cs510-fullstack-datagrade/issues"
+  },
+  "homepage": "https://github.com/michelleduer/cs510-fullstack-datagrade#readme",
+  "dependencies": {
+    "express": "^4.15.4"
+  }
+}
