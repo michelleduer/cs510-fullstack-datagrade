@@ -11,7 +11,9 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/5.0.10/highcharts.js"></script>
 
+        <!-- // TODO: not needed?
         <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        -->
 
 
         <title>Data Grade</title>
@@ -46,6 +48,36 @@
                 border-right: 1px darkgray solid;
             }
         </style>
+
+        <script>
+            var id = '';
+            var lastName = '';
+            var year = 2000;
+            var system = '';
+            var term = '';
+
+            /*
+            * When document is ready and user submits course data,
+            * save input and search for a potential match in database
+             */
+            $(document).ready(function() {
+                var id, lastName;
+                $('#submitButton')
+                    .on('click', function() {
+                        id = $("#courseID").val();
+                        lastName = $("#lastName").val();
+
+                        $.post("localhost:8080/result", (id: id, lastName: lastName), function(data) {
+                            if (data === 'done') {
+                                alert('form entry success');
+                            }
+                        })
+
+
+                    })
+                ;
+            });
+        </script>
     </head>
     <body>
         <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -91,9 +123,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="courseInstructor" class="col-sm-2 control-label">Instructor's Last Name</label>
+                    <label for="lastName" class="col-sm-2 control-label">Instructor's Last Name</label>
                     <div class="col-sm-3">
-                        <input type="name" class="form-control" id="courseInstructor" placeholder="e.g. Niklaus, Hawkings ">
+                        <input type="name" class="form-control" id="lastName" placeholder="e.g. Niklaus, Hawkings ">
                     </div>
                 </div>
                 <div class="form-group">
@@ -102,20 +134,20 @@
                         <input type="name" class="form-control" id="academicYear" placeholder="e.g. 2017 ">
                     </div>
                 </div>
-                <div class="form-group" id="courseSystem">
+                <div class="form-group">
                     <label for="courseSystem" class="col-sm-2 control-label">Academic System</label>
                     <div class="col-sm-3">
                         <select class="form-control" id="courseSystem">
-                            <option value="quarter">Quarter</option>
+                            <option value="quarter" selected>Quarter</option>
                             <option value="semester">Semester</option>
                             <option value="other">Other</option>
                         </select>
                     </div>
                 </div>
-                <div class="form-group" id="quarterTerms">
-                    <label for="quarterTerms" class="col-sm-2 control-label" style="display:none">Term</label>
+                <div class="form-group">
+                    <label for="courseTerm" class="col-sm-2 control-label">Term</label>
                     <div class="col-sm-3">
-                        <select multiple class="form-control" id="quarterTerms" style="display:none">
+                        <select multiple class="form-control" id="courseTerm">
                             <option selected>Fall</option>
                             <option>Winter</option>
                             <option>Spring</option>
@@ -123,17 +155,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="semesterTerms" class="col-sm-2 control-label" style="display:none">Term</label>
-                    <div class="col-sm-3">
-                        <select multiple class="form-control" id="semesterTerms" style="display:none">
-                            <option selected>Fall</option>
-                            <option>Spring</option>
-                            <option>Summer</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
+                <div class="form-group" id="submitButton">
                     <div class="col-sm-8 col-sm-offset-2">
                         <button class="btn btn-primary" type="submit" value="Submit">submit</button>
                     </div>
@@ -142,7 +164,7 @@
             <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
         </div>
 
-        <script type="text/javascript" src="js/course_entry.js"></script>
+        <script type="text/javascript" src="js/find_course.js"></script>
         <script type="text/javascript" src="js/graph.js"></script>
     </body>
 </html>
