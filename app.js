@@ -12,6 +12,11 @@ app.get("/", function(req, res) {
     res.send("home page! CREATE log-in and registering options");
 });
 
+app.get("/course/:parameter", function(req, res) {
+    var page = req.params.parameter;
+    res.send("You are visiting a subpage: " + page + "!\n");
+});
+
 app.get("/search", function(req, res) {
     res.send("search for course using course name and instructor's name");
 });
