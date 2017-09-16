@@ -3,13 +3,26 @@
 *
 */
 
-
-var express = require('express');
+var express = require("express");
 var app = express();
 
+app.set("view engine", "ejs");
+
 app.get("/", function(req, res) {
-    console.log("server started!\n");
-    res.send("home page! CREATE log-in and registering options");
+    res.render("home");
+});
+
+app.get("/create", function(req, res) {
+    res.render("create");
+});
+
+app.get("/courses", function(req, res) {
+    res.render("courses");
+});
+
+/*
+app.get("/course", function(req, res) {
+    res.send("View the specific course details with graph!");
 });
 
 app.get("/course/:parameter", function(req, res) {
@@ -18,23 +31,23 @@ app.get("/course/:parameter", function(req, res) {
 });
 
 app.get("/search", function(req, res) {
-    res.send("search for course using course name and instructor's name");
+    res.render("search");
 });
 
-app.get("/create", function(req, res) {
-    res.send("create a new course");
-});
-
-app.get("/add", function(req, res) {
-    res.send("found existing course, want to add it?");
+app.get("/found", function(req, res) {
+    res.render("found");
 });
 
 app.get("/view", function(req, res) {
+    res.render("view");
     res.send("view your course details (including COOL GRAPH!");
 });
+*/
 
 app.get("*", function(req, res) {
     res.send("error message with obligatory cute baby animal photo");
 });
 
-app.listen(8080 || process.env.PORT);
+app.listen(8080 || process.env.PORT, function(req, res) {
+    console.log("server started!\n");
+});
