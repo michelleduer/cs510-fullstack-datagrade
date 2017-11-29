@@ -105,13 +105,6 @@ app.get("/add", function(req, res) {
 
 
 /*
-app.post("/find", function(req, res) {
-    res.send("FIND");
-    //res.render("add");
-});
-*/
-
-/*
 app.get("/course", function(req, res) {
     res.send("View the specific course details with graph!");
 });
