@@ -136,7 +136,7 @@ app.get("/view", function(req, res) {
 */
 
 app.get("*", function(req, res) {
-    res.send("error message with obligatory cute baby animal photo");
+    res.render("pages/error");
 });
 
 app.listen(8080 || process.env.PORT, function(req, res) {
