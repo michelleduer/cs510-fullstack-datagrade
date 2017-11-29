@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<!-- Login/Registration Page -->
+
+<html lang="en">
+    <head>
+        <% include ../partials/head %>
+
+        <title>Login</title>
+
+        <% include ../partials/css_style %>
+    </head>
+    <body>
+        <% include ../partials/nav_logged_out %>
+        <div class="bg">
+            <div class="space"></div>
+            <div class="container">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label for="user" class="col-sm-2 control-label">Username: </label>
+                        <div class="col-sm-6">
+                            <input type="name" class="form-control" id="user" placeholder="Type Username">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="col-sm-2 control-label">Password: </label>
+                        <div class="col-sm-6">
+                            <input type="password" class="form-control" id="password" placeholder="Type Password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-1 col-sm-offset-4">
+                            <input type="button" class="btn group btn-warning" id="register" value="Register">
+                        </div>
+                        <div class="col-xs-1 col-sm-offset-1">
+                            <input type="button" class="btn group btn-primary" id="login" value="Login">
+                        </div>
+                    </div>
+                </div>
+                <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+            </div>
+        </div>
+        <% include ../partials/footer %>
+
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                var user = '';
+                var password = '';
+
+                // resource: https://codeforgeek.com/2014/09/handle-get-post-request-express-4/
+                // log user in if details are valid
+                $("#login").click(function() {
+                    console.log("login button clicked");
+                    user = $("#user").val();
+                    password = $("#password").val();
+                    $.post("http://localhost:8080/login",{user: user, password: password}, function(data) {
+                        console.log("TODO: log user in if they have an account\n");
+                    });
+                });
+
+                // otherwise, register user
+                $("#register").click(function() {
+                    console.log("register button clicked");
+                    user = $("#user").val();
+                    password = $("#password").val();
+                    user = $("#user").val();
+                    password = $("#password").val();
+                    $.post("http://localhost:8080/register",{user: user, password: password}, function(data) {
+                        console.log("TODO: register user with details if usr/pwd okay\n");
+                    });
+                });
+            });
+        </script>
+
+    </body>
+</html>
