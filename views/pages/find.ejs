@@ -74,6 +74,9 @@
                     <div class="form-group">
                         <div class="col-sm-8 col-sm-offset-2">
                             <input type="button" class="btn btn-primary" id="submit" type="submit" value="Submit">
+                            <!--
+                            <a href="/course"><input type="button" class="btn btn-primary" id="submit" type="submit" value="Submit"></a>
+                            -->
                         </div>
                     </div>
                 </div>
@@ -82,25 +85,24 @@
 
 
         <script type="text/javascript">
-            $(document).ready(function() {
-                var courseID, instructor = '';
-                var year = 0;
-                /* var system, quarter, semester = ''; TODO */
+    $(document).ready(function() {
+        var courseID, instructor = '';
+        var year = 0;
 
-                $("#submit").click(function() {
-                    console.log("submit button clicked");
-                    courseID = $("#courseID").val();
-                    instructor = $("#courseInstructor").val();
-                    year = $("#academicYear").val();
-                    /* TODO: add back later
-                    system = $("#courseSystem").val();
-                    quarter = $("#quarterTerms").val();
-                    semester = $("#semesterTerms").val();
-                    $.post("http://localhost:8080/find",{courseID: courseID, instructor: instructor, year: year, system: system, quarter: quarter, semester: semester}, function(data) {
-                    */
-                    $.post("http://localhost:8080/find",{courseID: courseID, instructor: instructor, year: year}, function(data) {
-                        console.log("Look up course in DB!");
-                    });
+        $("#submit").click(function() {
+            courseID = $("#courseID").val();
+            instructor = $("#courseInstructor").val();
+            year = $("#academicYear").val();
+
+                $.ajax({
+                    type: 'GET',
+                    data: {"courseID":courseID, "instructor":instructor,"year":year},
+                    //dataType: 'json',
+                    url: 'http://localhost:8080/find',
+                    success: function(data) {
+                        //console.log("data\n" + data);
+                    }
+                });
                 });
             });
         </script>
