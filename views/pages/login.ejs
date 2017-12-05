@@ -33,7 +33,10 @@
                             <a href="/home"><input type="button" class="btn group btn-warning" id="register" value="Register"></a>
                         </div>
                         <div class="col-xs-1 col-sm-offset-1">
+                            <input type="button" class="btn group btn-primary" id="login" value="Login">
+                            <!--
                             <a href="/home"><input type="button" class="btn group btn-primary" id="login" value="Login"></a>
+                            -->
                         </div>
                     </div>
                 </div>
@@ -54,7 +57,11 @@
                     user = $("#user").val();
                     password = $("#password").val();
                     $.post("http://localhost:8080/login",{user: user, password: password}, function(data) {
-                        console.log("TODO: log user in if they have an account\n");
+                        if (data === '200') {
+                            window.location = "/home"
+                        } else if (data === '307') {
+                            window.location = "/"
+                        }
                     });
                 });
 
