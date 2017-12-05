@@ -13,11 +13,32 @@
     <body>
         <% include ../partials/nav %>
         <div class="bg-graph">
-            <div class="space-graph"></div>
-            <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+            <div class="container">
+                <br>
+                <div class="space-graph"></div>
+                <h2 id="white-title">Course Details:</h2>
+                <div id="graph-container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+            </div>
         </div>
         <p class="footer">© Copyright 2017 Data Grade by Michelle Duer</br>
             Photo by Janko Ferlič on Unsplash</br></p>
+
+
         <script type="text/javascript" src="graph.js" charset="UTF-8"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                var courseID = ''
+                /*
+                $.ajax({
+                    type: 'GET',
+                    url: 'http://localhost:8080/course',
+                    success: function(data) {
+                        console.log("POST data = " );
+                        console.log(data);
+                    }
+                });
+                */
+            });
+        </script>
     </body>
 </html>

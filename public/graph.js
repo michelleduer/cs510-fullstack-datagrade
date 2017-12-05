@@ -1,4 +1,10 @@
-Highcharts.chart('container', {
+/*
+* source: https://www.highcharts.com/demo/spline-plot-bands
+* and adjustments made with the help of jsfiddle
+* http://jsfiddle.net/k2xzk0bg/
+ */
+
+Highcharts.chart('graph-container', {
     chart: {
         type: 'spline'
     },
