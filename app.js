@@ -23,18 +23,6 @@ var con = mysql.createConnection({
     database : 'datag'
 });
 
-con.connect(function(err) {
-    if (err) throw err;
-    console.log("Connected to DB!")
-});
-
-var q = 'SELECT * FROM users';
-//var q = 'USE datag;'
-con.query(q, function(err, res) {
-    if (err) throw err;
-    console.log("The database found res: " + res[0].user + res[0].pwd);
-});
-
 /*
 * source on how to implement ejs templating:
 * https://scotch.io/tutorials/use-ejs-to-template-your-node-application
@@ -95,12 +83,27 @@ app.post("/login", function(req, res) {
     });
     var user = req.body.user;
     var pwd = req.body.password;
-    console.log("RECEIVED: User: " + user + ", pass: " + pwd);
-    if (user === "test" && pwd === "secret") {
-        console.log("User and password verified!");
-   } else {
-        return res.end("Invalid username and/or password");
-    }
+
+    var q = "SELECT * FROM users WHERE user='" + user + "'";
+    con.connect(function(err) {
+        if (err) throw err;
+        console.log("Connected to DB!")
+
+        con.query(q, function(err, result) {
+            if (err) throw err;
+
+            console.log("res.length = " + result.length);
+            if (result.length >= 1) {
+                if (result[0].user === user && result[0].pwd === pwd) {
+                    con.end();
+                    res.status(200).send('200');
+                }
+            } else {
+                con.end();
+                res.status(307).send('307');
+            }
+        })
+    });
 });
 
 /*
@@ -120,7 +123,19 @@ app.post("/register", function(req,res) {
     });
     var user = req.body.user;
     var pwd = req.body.pwd;
+
+    var q = 'SELECT * FROM users WHERE user=' + user;
+    con.query(function(err, res) {
+        if (err) throw err;
+        if (q != undefined) {
+            console.log("USER FOUND! ABLE TO LOG IN.\n");
+        } else {
+            console.log("USER not found.\n");
+        }
+    })
+    /*
     console.log("User: " + user + " with pwd: " + pwd + "\n");
+    */
     res.end("login attempted -- successful?");
 });
 
@@ -216,8 +231,8 @@ app.get("*", function(req, res) {
 /*
 * Close Database
  */
-con.end();
 
 app.listen(8080 || process.env.PORT, function(req, res) {
     console.log("server started!\n");
 });
+
