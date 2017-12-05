@@ -1,5 +1,5 @@
 /*
-*  Route to various site pages using express framework
+*  Route to various site pages using node.js with express framework
 */
 
 var express = require("express");
@@ -7,10 +7,17 @@ var parser = require("body-parser");
 var static = require("serve-static-middleware");
 var mysql = require("mysql");
 
-
-//var passport = require("passport");
-var strategy = require("passport-http");
 var app = express();
+
+/*
+* source on how to implement ejs templating:
+* https://scotch.io/tutorials/use-ejs-to-template-your-node-application
+ */
+app.set("view engine", "ejs");
+
+app.use(parser.urlencoded({extended: false}));
+app.use(parser.json());
+app.use(express.static('public'));
 
 /*
 * Create and connect to relevant database
@@ -23,39 +30,6 @@ var con = mysql.createConnection({
     database : 'datag'
 });
 
-/*
-* source on how to implement ejs templating:
-* https://scotch.io/tutorials/use-ejs-to-template-your-node-application
- */
-app.set("view engine", "ejs");
-
-app.use(parser.urlencoded({extended: false}));
-app.use(parser.json());
-app.use(express.static('public'));
-/*
-app.use(passport.initialize());
-app.use(passport.session());
-*/
-/*
-* source: https://github.com/passport/express-3.x-http-basic-example/blob/master/server.js
-* and Simon's 6-auth.js solution from express assignments
-* hard-coded for testing and would want to improve this drastically
- */
-/*
-passport.use(new strategy.BasicStrategy(
-    function(user,pass,done) {
-        if (user === "test") {
-            if (pass === "secret") {
-                return done(null, true);
-            }
-        }
-        return done(null, false);
-    }
-));
-app.use(passport.authenticate('basic', {
-    'session': false
-}));
-*/
 
 
 /*
@@ -92,7 +66,6 @@ app.post("/login", function(req, res) {
         con.query(q, function(err, result) {
             if (err) throw err;
 
-            console.log("res.length = " + result.length);
             if (result.length >= 1) {
                 if (result[0].user === user && result[0].pwd === pwd) {
                     con.end();
@@ -119,24 +92,35 @@ app.get("/register", function(req, res) {
 app.post("/register", function(req,res) {
     res.status(200);
     res.set({
-        'Content-Type':'text/html'
+        'Content-Type': 'text/html'
     });
-    var user = req.body.user;
-    var pwd = req.body.pwd;
 
-    var q = 'SELECT * FROM users WHERE user=' + user;
-    con.query(function(err, res) {
+    var user = req.body.user;
+    var pwd = req.body.password;
+
+    var q = "SELECT * FROM users WHERE user='" + user + "'";
+    con.connect(function(err) {
         if (err) throw err;
-        if (q != undefined) {
-            console.log("USER FOUND! ABLE TO LOG IN.\n");
-        } else {
-            console.log("USER not found.\n");
-        }
-    })
-    /*
-    console.log("User: " + user + " with pwd: " + pwd + "\n");
-    */
-    res.end("login attempted -- successful?");
+        console.log("Connected to DB!")
+
+        con.query(q, function(err, result) {
+            if (err) throw err;
+
+            if (result.length < 1) {
+                q = "INSERT INTO users (user,pwd) VALUES ('" + user + "','" + pwd + "');";
+
+                con.query(q, function(err, result) {
+                    if (err) throw err;
+                    con.end();
+                    res.status(200).send('200');
+                })
+            } else {
+                con.end();
+                res.status(307).send('307');
+            }
+        })
+    });
+
 });
 
 app.get("/settings", function(req, res) {
@@ -165,7 +149,8 @@ app.get("/find", function(req, res) {
     });
     res.render("pages/find");
     var courseID = req.body.courseID;
-    console.log(courseID);
+
+    //console.log(courseID);
 });
 
 app.post("/find", function(req, res) {
